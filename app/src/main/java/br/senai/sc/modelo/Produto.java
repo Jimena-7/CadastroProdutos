@@ -16,10 +16,7 @@ public class Produto implements Serializable {
         this.Valor = valor;
     }
 
-    public Produto(String nome, float valor) {
-        Nome = nome;
-        Valor = valor;
-    }
+
 
     public int getId() {
         return id;

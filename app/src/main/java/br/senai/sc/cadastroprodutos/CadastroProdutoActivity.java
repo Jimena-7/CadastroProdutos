@@ -28,7 +28,7 @@ public class CadastroProdutoActivity extends AppCompatActivity {
     private void carregarProduto() {
         Intent intent = getIntent();
         if (intent != null && intent.getExtras() != null &&
-                intent.getExtras().get("produtoEditado") != null){
+                intent.getExtras().get("produtoEdicao") != null) {
             Produto produto = (Produto) intent.getExtras().get("produtoEdicao");
             EditText editTextNome = findViewById(R.id.editText_nome);
             EditText editTextValor = findViewById(R.id.editText_valor);
