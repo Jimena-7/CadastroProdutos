@@ -1,4 +1,4 @@
-package br.senai.sc.database;
+package br.senai.sc.database.entity;
 
 import android.provider.BaseColumns;
 

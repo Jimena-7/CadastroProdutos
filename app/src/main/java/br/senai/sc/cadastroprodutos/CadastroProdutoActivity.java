@@ -7,13 +7,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import br.senai.sc.database.ProdutoDAO;
 import br.senai.sc.modelo.Produto;
 
 public class CadastroProdutoActivity extends AppCompatActivity {
-    private final int RESULT_CODE_NOVO_PRODUTO = 10;
-    private final int RESULT_CODE_PRODUTO_EDITADO = 11;
-    private boolean edicao = false;
+
+
+
     private int id = 0;
 
     @Override
@@ -34,17 +36,15 @@ public class CadastroProdutoActivity extends AppCompatActivity {
             EditText editTextValor = findViewById(R.id.editText_valor);
             editTextNome.setText(produto.getNome());
             editTextValor.setText(String.valueOf(produto.getValor()));
-            edicao = true;
             id = produto.getId();
-
         }
     }
 
-    public void onClickVoltar (View v) {
+    public void onClickVoltar(View v) {
         finish();
     }
 
-    public void onClickSalvar (View v) {
+    public void onClickSalvar(View v) {
         EditText editTextNome = findViewById(R.id.editText_nome);
         EditText editTextValor = findViewById(R.id.editText_valor);
 
@@ -52,18 +52,15 @@ public class CadastroProdutoActivity extends AppCompatActivity {
         Float Valor = Float.parseFloat(editTextValor.getText().toString());
 
         Produto produto = new Produto(id, Nome, Valor);
-        Intent intent = new Intent();
-        if (edicao) {
-            intent.putExtra("produtoEditado", produto);
-            setResult(RESULT_CODE_PRODUTO_EDITADO, intent);
-
+        ProdutoDAO produtoDAO = new ProdutoDAO(getBaseContext());
+        boolean salvou = produtoDAO.salvar(produto);
+        if (salvou) {
+            finish();
         } else {
-            intent.putExtra("novoProduto", produto);
-            setResult(RESULT_CODE_NOVO_PRODUTO, intent);
+            Toast.makeText(CadastroProdutoActivity.this, "Erro ao salvar", Toast.LENGTH_LONG).show();
+
+
         }
-        finish();
 
     }
-
-
 }
