@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         listViewProdutos = findViewById(R.id.listView_produtos);
         ArrayList<Produto> produtos = new ArrayList<Produto>();
         definirOnClickListenerListView();
-        definirOnLongClickListener();
+
     }
 
     @Override
@@ -64,34 +64,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent( MainActivity.this, CadastroProdutoActivity.class);
         startActivity(intent);
     }
-
-
-
-    private void definirOnLongClickListener() {
-        listViewProdutos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, final long id) {
-                final Produto produtoClicado = adapterProdutos.getItem(position);
-
-
-                new AlertDialog.Builder (MainActivity.this)
-                        .setIcon((android.R.drawable.ic_delete))
-                        .setTitle("Deseja excluir? ")
-                        .setMessage("Deseja excluir este item? ")
-                        .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                adapterProdutos.remove(produtoClicado);
-                                adapterProdutos.notifyDataSetChanged();
-                                Toast.makeText(MainActivity.this, "Produto deletado", Toast.LENGTH_LONG).show();
-                            }
-                        })
-                        .setNegativeButton("Não", null).show();
-                return true;
-
-            }
-        });
-    }
+    
 }
 
 

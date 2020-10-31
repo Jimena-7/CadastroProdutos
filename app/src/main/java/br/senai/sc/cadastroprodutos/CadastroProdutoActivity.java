@@ -63,4 +63,14 @@ public class CadastroProdutoActivity extends AppCompatActivity {
         }
 
     }
+
+    public void onClickDeletar (View v) {
+        ProdutoDAO produtoDAO = new ProdutoDAO(getBaseContext());
+        boolean excluiu = produtoDAO.excluir(id);
+        if (excluiu) {
+            finish();
+        }else {
+            Toast.makeText(CadastroProdutoActivity.this, "Erro ao excluir", Toast.LENGTH_SHORT).show();
+        }
+    }
 }
